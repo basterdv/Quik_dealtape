@@ -83,8 +83,6 @@ frame4.grid(column=1,row=0,padx=0,pady=0,ipady=100, ipadx=190,sticky=S)
 frame3 = ttk.LabelFrame(text='log frame', width=300, height=200)
 frame3.grid(column=0, row=1, padx=5, sticky=W, ipadx=3, columnspan=3)
 
-
-
 listbox1 = Listbox(frame3, width=180)
 listbox1.pack(side='left')
 
@@ -246,9 +244,6 @@ tree2.column("#4", stretch=NO, width=60)
 tree2.column("#5", stretch=NO, width=60)
 
 
-
-
-#
 # ysb = ttk.Scrollbar(orient=tkinter.VERTICAL, command=tree.yview)
 
 
@@ -262,12 +257,9 @@ def clear_data():
     tree.delete(*tree.get_children())
     # combobox.set('')
     # combobox.configure(values='')
-
-
 def exit():
     choice = askyesno(title="Выход", message="Хотите закрыть приложение?")
     if choice:
         root.destroy()
-
-
+root.protocol("WM_DELETE_WINDOW", exit)
 root.mainloop()
