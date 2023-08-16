@@ -147,19 +147,24 @@ def analis():
 
 
     df = pd.DataFrame(new_list, columns=['key1', 'key2', 'key3', 'key4', 'key5', 'key6', 'key7', 'key8'])
-    # print(df)
-    # subset1 = ['key1', 'key2', 'key3', 'key4', 'key5']
-    subset2 = ['key2', 'key3', 'key4', 'key8']
-    que = df.duplicated(subset=subset2, keep=False)
-    #df1 = df[que].groupby(subset2)['key6'].sum()
-    # df2 = df[~que].groupby(subset2)['key6'].sum()
-    df1 = df.groupby(subset2)['key6'].sum().reset_index()
-    print(df1)
+    df = df.drop(columns=['key1','key3','key7'])
+
+    print(df)
+
+    subset = ['key2', 'key4', 'key8']
+    que = df.duplicated(subset=subset, keep=False).count()
+    print(que)
+    df1 = df[que].groupby(subset)['key6'].sum().reset_index()
+
+    #df1 = df[~que].groupby(subset2)['key6'].sum()
+    #df1 = df.groupby(subset2)['key6'].sum().reset_index()
+
+    print(df1.count)
 
     #print(df1)
     df_row = df1.to_numpy().tolist()
 
-    for row in df1:
+    for row in df_row:
         #print(row)
         #     if temp_row != '':
         #         if row[1] == temp_row:
@@ -255,6 +260,7 @@ tree2.column("#5", stretch=NO, width=60)
 # удаляем данные в таблице
 def clear_data():
     tree.delete(*tree.get_children())
+    tree2.delete(*tree2.get_children())
     # combobox.set('')
     # combobox.configure(values='')
 def exit():
